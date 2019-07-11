@@ -8,6 +8,7 @@ RUN apk upgrade --update \
   freetype-dev \
   libjpeg-turbo-dev \
   libmcrypt-dev \
+  libxml2-dev \
   libpng-dev \  
   && docker-php-source extract \
   && docker-php-ext-configure gd \
