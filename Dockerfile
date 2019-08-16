@@ -20,5 +20,6 @@ RUN apk upgrade --update \
   && docker-php-ext-enable redis \
   && docker-php-source delete \
   && apk del --no-network .build-deps \
+  && ssh-keygen -A \
   && sed -i '/www-data/s/sbin\/nologin/bin\/sh/g' /etc/passwd \
   && echo 'www-data:www-data' | chpasswd # lol use in production for fun and games
