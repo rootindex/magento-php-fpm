@@ -11,6 +11,7 @@ RUN apk upgrade --update \
   libxml2-dev \
   libpng-dev \
   openssh \
+  git \
   && docker-php-source extract \
   && docker-php-ext-configure gd \
   --with-freetype-dir=/usr/include/ \
