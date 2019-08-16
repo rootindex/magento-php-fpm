@@ -9,7 +9,8 @@ RUN apk upgrade --update \
   libjpeg-turbo-dev \
   libmcrypt-dev \
   libxml2-dev \
-  libpng-dev \  
+  libpng-dev \
+  openssh \
   && docker-php-source extract \
   && docker-php-ext-configure gd \
   --with-freetype-dir=/usr/include/ \
@@ -18,4 +19,6 @@ RUN apk upgrade --update \
   && pecl install redis-4.0.1 \
   && docker-php-ext-enable redis \
   && docker-php-source delete \
-  && apk del --no-network .build-deps
+  && apk del --no-network .build-deps \
+  && sed -i '/www-data/s/sbin\/nologin/bin\/sh/g' /etc/passwd \
+  && echo 'www-data:www-data' | chpasswd # lol use in production for fun and games
