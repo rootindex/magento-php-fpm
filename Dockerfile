@@ -1,5 +1,7 @@
 FROM php:7.2.19-fpm-alpine3.10
 
+ENV PATH /usr/local/bin:/usr/local/sbin:$PATH
+
 RUN apk upgrade --update \
   && apk add --no-cache --virtual .build-deps \
   $PHPIZE_DEPS \
