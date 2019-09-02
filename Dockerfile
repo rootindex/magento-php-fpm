@@ -18,9 +18,9 @@ RUN apk upgrade --update \
   && docker-php-ext-configure gd \
   --with-freetype-dir=/usr/include/ \
   --with-jpeg-dir=/usr/include/ \
-  && docker-php-ext-install -j$(nproc) gd pdo_mysql soap \
+  && docker-php-ext-install -j$(nproc) gd pdo_mysql soap xdebug \
   && pecl install lzf redis-4.0.1 \
-  && docker-php-ext-enable redis lzf \
+  && docker-php-ext-enable redis lzf xdebug \
   && docker-php-source delete \
   && apk del --no-network .build-deps \
   && ssh-keygen -A \
