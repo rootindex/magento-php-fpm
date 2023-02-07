@@ -1,4 +1,4 @@
-FROM php:7.2.19-fpm-alpine3.10
+FROM php:7.4.33-fpm-alpine3.16
 
 RUN apk upgrade --update \
   && apk add --no-cache --virtual .build-deps \
@@ -16,11 +16,11 @@ RUN apk upgrade --update \
   bash \
   && docker-php-source extract \
   && docker-php-ext-configure gd \
-  --with-freetype-dir=/usr/include/ \
-  --with-jpeg-dir=/usr/include/ \
+  --with-freetype=/usr/include/ \
+  --with-jpeg=/usr/include/ \
   && docker-php-ext-install -j$(nproc) gd pdo_mysql soap \
   && pecl install lzf redis-4.0.1 xdebug \
-  && docker-php-ext-enable redis lzf xdebug \
+  && docker-php-ext-enable redis lzf \
   && docker-php-source delete \
   && apk del --no-network .build-deps \
   && ssh-keygen -A \
